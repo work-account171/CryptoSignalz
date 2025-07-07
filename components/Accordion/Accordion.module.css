@@ -1,0 +1,250 @@
+.accordion {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  will-change: contents; /* Optimize repaints */
+  transform: translateZ(0); /* Force GPU acceleration */
+  backface-visibility: hidden;
+}
+
+.accordionItem {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(91, 104, 223, 0.15);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); /* Simplified bezier for better performance */
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(91, 104, 223, 0.05);
+  position: relative;
+  backdrop-filter: blur(5px);
+  will-change: transform, box-shadow, border-color; /* Hint to browser about properties that will change */
+  transform: translateZ(0); /* Force GPU acceleration */
+  backface-visibility: hidden;
+}
+
+.accordionItem::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(91, 104, 223, 0.08), rgba(0, 246, 255, 0.08));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.accordionItem:hover {
+  border-color: rgba(91, 104, 223, 0.3);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(91, 104, 223, 0.2);
+  transform: translateY(-2px);
+}
+
+.accordionItem:hover::before {
+  opacity: 0.5;
+}
+
+.accordionItem.active {
+  border-color: rgba(91, 104, 223, 0.4);
+  background: linear-gradient(to bottom right, rgba(91, 104, 223, 0.08), rgba(0, 246, 255, 0.08));
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(91, 104, 223, 0.3);
+  transform: translateY(-3px);
+}
+
+.accordionHeader {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1); /* Faster, simpler transition */
+  position: relative;
+  overflow: hidden;
+  will-change: background-color, color; /* Hint for better performance */
+  transform: translateZ(0); /* Force GPU acceleration */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
+
+.accordionHeader::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right,
+    transparent,
+    rgba(91, 104, 223, 0.2),
+    rgba(0, 246, 255, 0.2),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  will-change: opacity;
+}
+
+.accordionItem.active .accordionHeader::after {
+  opacity: 1;
+}
+
+.accordionHeader:hover {
+  color: var(--primary);
+  background: rgba(91, 104, 223, 0.03);
+}
+
+.question {
+  font-size: 1.15rem;
+  padding-right: 2rem;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s ease; /* Faster transition */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  will-change: transform; /* Hint for better performance */
+  transform: translateZ(0); /* Force GPU acceleration */
+}
+
+.accordionHeader:hover .question {
+  transform: translateX(5px);
+}
+
+.icon {
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(91, 104, 223, 0.1);
+  border-radius: 50%;
+  padding: 7px;
+  color: var(--primary);
+  transition: all 0.25s ease; /* Faster transition */
+  z-index: 2;
+  box-shadow: 0 2px 10px rgba(91, 104, 223, 0.2);
+  border: 1px solid rgba(91, 104, 223, 0.2);
+  will-change: transform, background, box-shadow; /* Hint for better performance */
+  transform: translateZ(0); /* Force GPU acceleration */
+}
+
+.accordionItem.active .icon {
+  background: linear-gradient(135deg, #5b68df, #00f6ff);
+  color: white;
+  transform: rotate(180deg) translateZ(0); /* Maintain GPU acceleration during rotation */
+  box-shadow: 0 5px 15px rgba(91, 104, 223, 0.4);
+}
+
+.accordionContent {
+  overflow: hidden;
+  position: relative;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  will-change: height, opacity; /* Hint for better performance */
+  transform: translateZ(0); /* Force GPU acceleration */
+  backface-visibility: hidden;
+}
+
+.accordionContent::before {
+  content: '';
+  position: absolute;
+  left: 1.7rem;
+  top: 0;
+  bottom: 1.7rem;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(91, 104, 223, 0.8), rgba(0, 246, 255, 0.4));
+  opacity: 0.3;
+  border-radius: 1px;
+  transform: translateZ(0); /* Force GPU acceleration for gradients */
+}
+
+.answer {
+  padding: 0.5rem 1.7rem 1.7rem 2.5rem;
+  color: var(--muted-foreground);
+  line-height: 1.8;
+  font-size: 1.05rem;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(to bottom, rgba(91, 104, 223, 0.02), transparent);
+  will-change: opacity, transform; /* Hint for better performance */
+  transform: translateZ(0); /* Force GPU acceleration */
+}
+
+.accordionItem.active .accordionHeader {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.accordionItem.active .question {
+  background: linear-gradient(135deg, #5b68df 30%, #00f6ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(91, 104, 223, 0.2);
+  position: relative;
+  transform: translateZ(0); /* Force GPU acceleration for gradient text */
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, #5b68df, #00f6ff);
+  border-radius: 1px;
+  opacity: 0.8;
+  box-shadow: 0 1px 8px rgba(91, 104, 223, 0.5);
+  will-change: opacity; /* Hint for better performance */
+  transform: translateZ(0); /* Force GPU acceleration */
+}
+
+@media (max-width: 768px) {
+  .accordionHeader {
+    padding: 1.25rem;
+  }
+  
+  .question {
+    font-size: 1rem;
+  }
+  
+  .answer {
+    font-size: 0.95rem;
+    padding: 0 1.25rem 1.25rem 1.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .accordionHeader {
+    padding: 1rem;
+  }
+  
+  .question {
+    font-size: 0.95rem;
+  }
+  
+  .answer {
+    font-size: 0.9rem;
+    padding: 0 1rem 1rem 1rem;
+  }
+  
+  .icon {
+    min-width: 24px;
+    height: 24px;
+    padding: 4px;
+  }
+  
+  .accordionContent::before {
+    left: 1rem;
+  }
+}

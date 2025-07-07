@@ -1,0 +1,306 @@
+.pricingCardsContainer {
+  width: 100%;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.toggleOption {
+  font-size: 1rem;
+  color: var(--muted-foreground);
+  transition: color 0.3s ease;
+}
+
+.toggleOption.active {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.toggleOption:last-child {
+  display: flex;
+  align-items: center;
+}
+
+.discount {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(0, 246, 255, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.toggleSwitch {
+  margin: 0 1rem;
+  position: relative;
+}
+
+.toggleInput {
+  display: none;
+}
+
+.toggleLabel {
+  display: block;
+  width: 60px;
+  height: 32px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.toggleButton {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toggleInput:checked + .toggleLabel {
+  background: rgba(91, 104, 223, 0.2);
+  border-color: var(--primary);
+}
+
+.toggleInput:checked + .toggleLabel .toggleButton {
+  left: calc(100% - 28px);
+  background: var(--accent);
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.pricingCard {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+              var(--gradient-primary) border-box;
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.popularTag {
+  position: absolute;
+  top: 1.5rem;
+  right: -3rem;
+  background: var(--gradient-primary);
+  color: white;
+  padding: 0.3rem 3rem;
+  transform: rotate(45deg);
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(91, 104, 223, 0.3);
+}
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.planName {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.planPrice {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.currency {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.amount {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.period {
+  font-size: 1rem;
+  color: var(--muted-foreground);
+  margin-top: 1rem;
+}
+
+.planDescription {
+  color: var(--muted-foreground);
+  font-size: 0.95rem;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  flex: 1;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.checkmark, .xmark {
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.checkmark {
+  color: var(--success);
+}
+
+.xmark {
+  color: var(--muted);
+}
+
+.disabled {
+  color: var(--muted);
+}
+
+.cardFooter {
+  margin-top: auto;
+}
+
+.ctaButton {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  font-family: var(--font-sans);
+  text-align: center;
+}
+
+.primary {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: 0 4px 14px rgba(91, 104, 223, 0.4);
+}
+
+.primary:hover {
+  box-shadow: 0 6px 20px rgba(91, 104, 223, 0.6);
+}
+
+.secondary {
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+.secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--primary);
+}
+
+.comparisonLink {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.comparisonLink a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.comparisonLink a:hover {
+  color: var(--accent);
+}
+
+.comparisonLink a::after {
+  content: '↓';
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.comparisonLink a:hover::after {
+  transform: translateY(3px);
+}
+
+@media (max-width: 992px) {
+  .featured {
+    transform: scale(1);
+  }
+  
+  .pricingGrid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .pricingGrid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .pricingCard {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .toggle {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .planName {
+    font-size: 1.5rem;
+  }
+  
+  .amount {
+    font-size: 3.5rem;
+  }
+  
+  .feature {
+    font-size: 0.9rem;
+  }
+}
